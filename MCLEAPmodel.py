@@ -1,18 +1,22 @@
-# ******* THIS OPEN-SOURCE, UNWARRANTIED CODE IS COVERED BY A GNU GENERAL PUBLIC LICENSE. *******
-# 
-# LEAP finder.
-# Version: 0.2
-# Date: 7 April 2021
-# Updated: 4 December 2021
-# Author: Scott W. Powell (powellscottw@gmail.com)
+"""
 
-# Purpose: Find long-dated call options with high realistic potential return on investment based 
-# on growth assumptions consistent with growth over specified historical time period.
-# By default, the historical time period is 5 years. Users can change this by modifying the "years"
-# variable in the main() function located at the bottom of this code.
-# "Long-dated" is considered any call option with an expiration date at least 1 year from current date.
+******* THIS OPEN-SOURCE, UNWARRANTIED CODE IS COVERED BY A GNU GENERAL PUBLIC LICENSE. *******
 
-# Data access based on yfinance module by Ran Aroussi (pypi.org/project/yfinance)
+LEAP finder.
+Version: 0.2
+Date: 7 April 2021
+Updated: 4 December 2021
+Author: Scott W. Powell (powellscottw@gmail.com)
+
+Purpose: Find long-dated call options with high realistic potential return on investment based 
+on growth assumptions consistent with growth over specified historical time period.
+By default, the historical time period is 5 years. Users can change this by modifying the "years"
+variable in the main() function located at the bottom of this code.
+"Long-dated" is considered any call option with an expiration date at least 1 year from current date.
+
+Data access based on yfinance module by Ran Aroussi (pypi.org/project/yfinance)
+
+"""
 
 import sys
 
@@ -219,7 +223,7 @@ def prompt():
 	
 	# Get user input for ticker or ask to quit.
 
-	print('Enter ticker for stock to get LEAPS information for it, or enter q to exit.')
+	print('\nEnter ticker for stock to get LEAPS information for it, or enter q to exit.')
 	val = input()
 
 	if val == 'q':
@@ -236,7 +240,9 @@ def run(ticker,years):
 	options = liststock(ticker,years)
 
 	if options is None:
-		print('\nSomething went wrong. Perhaps an invalid ticker was entered. Try again.')
+		print('\nSomething went wrong. Perhaps an invalid ticker was entered. \
+			If the error repeatedly occurs, there may be a problem with the Yahoo \
+			Finance API and you may need to wait and try again later.')
 	else:
 		prettyprint(options,ticker)
 		# complete()
