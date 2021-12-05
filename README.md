@@ -12,4 +12,10 @@ After a user requests information for a ticker, code will print to the terminal 
 
 Current option price is estimated as the current ASK price.
 
-A conda python environment is included in finance.yml. 
+A conda python environment is included in MCLEAPS.yml. It contains the requisite packages to run the code. If you have anaconda installed, you may install this environment.
+
+The minimum dependencies are the following (install these manually if you cannot install the environment provided):
+- yfinance (pip install yfinance)
+- numpy 
+- pandas
+- termcolor (pip install termcolor)
