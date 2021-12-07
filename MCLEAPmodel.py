@@ -112,8 +112,11 @@ def simulateMC(stock,years):
 	history = history[history.Dividends==0]
 
 	# Compute percent change per week.
-	pct = (history['Close']-history['Open'])/history['Open']
-	
+	#pct = (history['Close']-history['Open'])/history['Open']
+	pct = [(history['Close'][i]-history['Close'][i-1]) / \
+		history['Close'][i-1] \
+		for i in np.arange(1,len(history))]
+
 	# For now, assume that gains and losses are normally distributed about the mean.
 	mean, stdev = 1+np.mean(pct), np.std(pct)
 
@@ -122,11 +125,14 @@ def simulateMC(stock,years):
 
 	# Embedded Monte Carlo function.
 	def montecarlo(numsims,weeks):
+		from numpy.random import default_rng
+		rng = default_rng()
 		dummy = np.zeros([numsims,weeks])
 		for i in range(numsims):
 			dummy[i,0] = price
 			for j in np.arange(1,weeks):
-				dummy[i,j] = dummy[i,j-1]*(np.random.normal(loc=mean,scale=stdev))
+				dummy[i,j] = dummy[i,j-1]*(rng.normal(loc=mean,scale=stdev,size=1))
+				# dummy[i,j] = dummy[i,j-1]*(np.random.normal(loc=mean,scale=stdev))
 		return dummy
 
 	# Let's name the columns based on date instead of number of weeks. This will help later when 
