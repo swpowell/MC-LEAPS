@@ -116,6 +116,8 @@ def simulateMC(stock,years):
 	pct = [(history['Close'][i]-history['Close'][i-1]) / \
 		history['Close'][i-1] \
 		for i in np.arange(1,len(history))]
+	pct = np.array(pct)
+	pct = pct[~np.isnan(pct)]
 
 	# For now, assume that gains and losses are normally distributed about the mean.
 	mean, stdev = 1+np.mean(pct), np.std(pct)
