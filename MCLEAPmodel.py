@@ -81,7 +81,7 @@ def getoptionsprices(stock,dates):
 		data['Ask Price'] = chain.calls.ask[cond]
 		# Volume.
 		data['Daily Volume'] = chain.calls.volume[cond]
- 
+
 		# Add data frame to the parent dictionary. Reset the indexing.
 		options[i] = data.reset_index(drop=True)
 
@@ -123,7 +123,7 @@ def simulateMC(stock,years):
 	mean, stdev = 1+np.mean(pct), np.std(pct)
 
 	# Get the last stock bid price (includes AH trading).	
-	price = stock.info['bid']
+	price = stock.info['regularMarketPrice']
 
 	# Embedded Monte Carlo function.
 	def montecarlo(numsims,weeks):
