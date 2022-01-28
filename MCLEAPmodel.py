@@ -47,7 +47,7 @@ def getoptionsprices(stock,dates):
 	options = {}
 
 	# Get the last stock bid price (includes AH trading).
-	price = stock.info['bid']	
+	price = stock.info['regularMarketPrice']	
 	print('Current price: $' + str(price))
 	
 	for i in dates:
